@@ -8,6 +8,7 @@
 <?php
 include ('menu.php');
 include ('connect.php');
+include ('functions.php');
 $publish=$_POST['publish'];
 $datum=$_POST['datum'];
 $status=$_POST['status'];
@@ -46,97 +47,24 @@ $resultaat=mysql_query($nieuws_query);
 
 echo "<span class='cms'><i>De boeking".mysql_insert_id()." is toegevoegd aan de database.<br><br></i></span>";
 $agendaid = mysql_insert_id();
-//creeer agendafile voor de pc
 
- $filename = "calendaritems/jeWelste_agenda_".mysql_insert_id().".ics";
- 
-
-$delete = @unlink($filename);
-if (@file_exists($filename))
-{
-  $filesys = eregi_replace("/","\\",$filename);
-  $delete = @system("del $filesys");
-  if (@file_exists($filename))
-  {
-    $delete = @chmod ($filename, 0775);
-    $delete = @unlink($filename);
-  $delete = @system("del $filesys");
-  }
-}
-if ($status == Optie){$displaystatus="optie";}
-$data = "BEGIN:VCALENDAR
-VERSION:1.0
-BEGIN:VEVENT
-SUMMARY:$displaystatus jeWelste
-DESCRIPTION;ENCODING=QUOTED-PRINTABLE:Status $status=0D=0ALokatie $lokatie=0D=0AAdres $adres=0D=0APostcode $postcode=0D=0APlaats $plaats=0D=0AGeluid $geluid=0D=0ASpelen $spelen=0D=0AGage Band $gage_band=0D=0A=0D=0Ahttp://www.jewelste.nl/agenda
-LOCATION: $plaats ,$lokatie
-DTSTART:".$jr.$md.$dg."T180000
-DTEND:".$jr.$md.$dg."T1830000
-END:VEVENT
-END:VCALENDAR";   
-$file = "calendaritems/jeWelste_agenda_".mysql_insert_id().".ics";    
-if (!$file_handle = fopen($file,"a")) { echo "Cannot open file"; }   
-if (!fwrite($file_handle, $data)) { echo "Cannot write to file"; }   
-  
-fclose($file_handle);   
-chmod ($file, 0777);
-
-//creeer agendafile voor de mac
-
- $filename = "calendaritems/jeWelste_agenda_mac_".mysql_insert_id().".ics";
- 
-
-$delete = @unlink($filename);
-if (@file_exists($filename))
-{
-  $filesys = eregi_replace("/","\\",$filename);
-  $delete = @system("del $filesys");
-  if (@file_exists($filename))
-  {
-    $delete = @chmod ($filename, 0775);
-    $delete = @unlink($filename);
-  $delete = @system("del $filesys");
-  }
-}
-if ($status == Optie){$displaystatus="optie";}
-$data_mac = "BEGIN:VCALENDAR
-CALSCALE:GREGORIAN
-METHOD:PUBLISH
-PRODID:-//Apple Computer\, Inc//iCal 1.0//EN
-VERSION:2.0
-BEGIN:VEVENT
-SUMMARY:$displaystatus jeWelste
-DESCRIPTION;ENCODING=QUOTED-PRINTABLE:Status $status\r\nLokatie $lokatie\r\nAdres $adres\r\nPostcode $postcode\r\nPlaats $plaats\r\nGeluid $geluid\r\nSpelen $spelen\r\nGage Band $gage_band\r\nhttp://www.jewelste.nl/agenda
-LOCATION: $plaats ,$lokatie
-DTSTART:".$jr.$md.$dg."T180000
-DTEND:".$jr.$md.$dg."T1830000
-END:VEVENT
-END:VCALENDAR";   
-$file_mac = "calendaritems/jeWelste_agenda_mac_".mysql_insert_id().".ics";    
-if (!$file_handle = fopen($file_mac,"a")) { echo "Cannot open file"; }   
-if (!fwrite($file_handle, $data_mac)) { echo "Cannot write to file"; }   
-  
-fclose($file_handle);   
-chmod ($file_mac, 0777);
-
-
-
-
-
-
-
-
-
-//
-$datum_mysql= $datum;
-$lokatie= $lokatie;
-$status= $status;
-$plaats= $plaats;
-$spelen= $spelen;
-$subject="Nieuwe boeking ".$datum_mysql ;
-include ('mailer3.php');
-
-
+$from_name = "jeWelste Agenda";
+$from_address = "agenda@jewelste.nl";
+$to_name = "jeWelste";
+$to_address = "agenda@jewelste.nl";
+$startTime = $datum." ".$band_opbouw.":00";
+$endTime = $datum."23:59:00";
+$subject = "[".$status."] Optreden jeWelste > ".$lokatie;
+$description .= "<h1>Optreden jeWelste > ".$lokatie."</h1>";
+$description .= $plaats."<br/>";
+$description .= "Status: ".$status."<br/>";
+$description .= "Soort optreden: ".$soort_optreden."<br/>";
+$description .= "Openbaar: ".$publish."<br/>";
+$description .= "Gage: ".$gage_band."<br/>";
+$description .= "Opmerkingen: ".$bijzonderheden."<br/>";
+$description .= "http://jewelste.nl/agenda/overzicht_item.php?id=".$agendaid;
+$location = $plaats;
+sendIcalEvent($from_name, $from_address, $to_name, $to_address, $startTime, $endTime, $subject, $description, $location, $agendaid);
 
 
 
