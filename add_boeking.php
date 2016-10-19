@@ -49,9 +49,9 @@ echo "<span class='cms'><i>De boeking".mysql_insert_id()." is toegevoegd aan de 
 $agendaid = mysql_insert_id();
 
 $from_name = "jeWelste Agenda";
-$from_address = "agenda@jewelste.nl";
+$from_address = "agenda2@jewelste.nl";
 $to_name = "jeWelste";
-$to_address = "agenda@jewelste.nl";
+$to_address = "agenda2@jewelste.nl";
 $startTime = $datum." ".$band_opbouw.":00";
 $endTime = $datum."23:59:00";
 $subject = "[".$status."] Optreden jeWelste > ".$lokatie;
