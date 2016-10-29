@@ -50,9 +50,14 @@ echo "<span class='cms'><i>De boeking".mysql_insert_id()." is toegevoegd aan de 
 $agendaid = mysql_insert_id();
 
 $from_name = "jeWelste Agenda";
-$from_address = "agenda2@jewelste.nl";
+$from_address = "agenda@jewelste.nl";
 $to_name = "jeWelste";
-$to_address = "agenda2@jewelste.nl";
+$to_address1 = "joel.plas@gmail.com";
+$to_address2 = "guidohuf@gmail.com";
+$to_address3 = "ivar.pijper@gmail.com";
+$to_address4 = "k.markesteijn@icloud.com";
+$to_address5 = "snookie@upcmail.com";
+$to_address6 = "jeroenvdberg0611@hotmail.com";
 if($band_opbouw==""){
 $startTime = $datum." 18:00:00";
 }else {
@@ -71,8 +76,12 @@ $description .= "Opmerkingen: ".$bijzonderheden."<br/>";
 $description .= "http://jewelste.nl/agenda/overzicht_item.php?id=".$agendaid;
 $description .= "<br/><br/><br/><br/><br/><br/><br/>";
 $location = $plaats;
-sendIcalEvent($from_name, $from_address, $to_name, $to_address, $startTime, $endTime, $subject, $description, $location, $agendaid);
-
+sendIcalEvent($from_name, $from_address, $to_name, $to_address1, $startTime, $endTime, $subject, $description, $location, $agendaid);
+sendIcalEvent($from_name, $from_address, $to_name, $to_address2, $startTime, $endTime, $subject, $description, $location, $agendaid);
+sendIcalEvent($from_name, $from_address, $to_name, $to_address3, $startTime, $endTime, $subject, $description, $location, $agendaid);
+sendIcalEvent($from_name, $from_address, $to_name, $to_address4, $startTime, $endTime, $subject, $description, $location, $agendaid);
+sendIcalEvent($from_name, $from_address, $to_name, $to_address5, $startTime, $endTime, $subject, $description, $location, $agendaid);
+sendIcalEvent($from_name, $from_address, $to_name, $to_address6, $startTime, $endTime, $subject, $description, $location, $agendaid);
 
 
 ?>

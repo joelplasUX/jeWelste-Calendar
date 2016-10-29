@@ -54,8 +54,14 @@ if ($send_mail == 'send') {
 	$from_name = "jeWelste Agenda";
 	$from_address = "agenda2@jewelste.nl";
 	$to_name = "jeWelste";
-	$to_address = "agenda2@jewelste.nl";
-	if($band_opbouw==""){
+	$to_address1 = "joel.plas@gmail.com";
+	$to_address2 = "guidohuf@gmail.com";
+	$to_address3 = "ivar.pijper@gmail.com";
+	$to_address4 = "k.markesteijn@icloud.com";
+	$to_address5 = "snookie@upcmail.com";
+	$to_address6 = "jeroenvdberg0611@hotmail.com";
+	//$to_address = "joel.plas@gmail.com, guidohuf@gmail.com, ivar.pijper@gmail.com, k.markesteijn@icloud.com, snookie@upcmail.com";
+if($band_opbouw==""){
 	$startTime = $datum." 18:00:00";
 	}else {
 	$startTime = $datum." ".$band_opbouw.":00";
@@ -73,7 +79,15 @@ if ($send_mail == 'send') {
 	$description .= "http://jewelste.nl/agenda/overzicht_item.php?id=".$id;
 	$description .= "<br/><br/><br/><br/><br/><br/><br/>";
 	$location = $plaats;
-	sendIcalEvent($from_name, $from_address, $to_name, $to_address, $startTime, $endTime, $subject, $description, $location, $agendaid);
+	sendIcalEvent($from_name, $from_address, $to_name, $to_address1, $startTime, $endTime, $subject, $description, $location, $agendaid);
+	sendIcalEvent($from_name, $from_address, $to_name, $to_address2, $startTime, $endTime, $subject, $description, $location, $agendaid);
+	sendIcalEvent($from_name, $from_address, $to_name, $to_address3, $startTime, $endTime, $subject, $description, $location, $agendaid);
+	sendIcalEvent($from_name, $from_address, $to_name, $to_address4, $startTime, $endTime, $subject, $description, $location, $agendaid);
+	sendIcalEvent($from_name, $from_address, $to_name, $to_address5, $startTime, $endTime, $subject, $description, $location, $agendaid);
+	sendIcalEvent($from_name, $from_address, $to_name, $to_address6, $startTime, $endTime, $subject, $description, $location, $agendaid);
+
+
+
 
 
 
