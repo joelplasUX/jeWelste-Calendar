@@ -17,17 +17,17 @@ body {
 </style></head>
 
 <body>
-<?php 
-function displaynl($datum) 
-{ 
-$dag=substr($datum, 8, 2); 
-$maand=substr($datum, 5, 2); 
-$jaar=substr($datum, 0, 4); 
-echo $dag,"-",$maand,"-",$jaar; 
+<?php
+function displaynl($datum)
+{
+$dag=substr($datum, 8, 2);
+$maand=substr($datum, 5, 2);
+$jaar=substr($datum, 0, 4);
+echo $dag,"-",$maand,"-",$jaar;
 }
 
 ?>
-<?php 
+<?php
 include ('menu.php');
 include ('connect.php');
 $id=$_GET['id'];
@@ -57,8 +57,8 @@ $status_old = $perrij['status'];
 	</tr>
 	<tr><td class="cms" width="120">
 Datum</td>
-<td><input type="text" name="datum" size="20" value="<?php echo displaynl($perrij['datum'])?>"> </td></tr>
-<tr><td class="cms">	
+<td><input type="date" name="datum" size="20" value="<?php echo $perrij['datum'];?>"> </td></tr>
+<tr><td class="cms">
 Status</td>
 <?php
 
@@ -87,31 +87,31 @@ echo "<td colspan='2'><select name='status'>
     <option value='Gecancelled' selected>gecancelled</option>
   </select></td>";}
   ?>
-  
-  
+
+
 </tr>
-	<tr><td class="cms">	
+	<tr><td class="cms">
 Lokatie</td>
 <td colspan="2"><input type="text" name="lokatie" size="60" maxlength="100" value="<?php echo $perrij['lokatie']; ?>"></td></tr>
-	<tr><td class="cms">	
+	<tr><td class="cms">
 Adres</td>
 <td colspan="2"><input type="text" name="adres" size="60" maxlength="100" value="<?php echo $perrij['adres']; ?>"></td></tr>
-	<tr><td class="cms">	
+	<tr><td class="cms">
 Postcode</td>
 <td colspan="2"><input type="text" name="postcode" size="60" maxlength="100" value="<?php echo $perrij['postcode']; ?>"></td></tr>
-	<tr><td class="cms">	
+	<tr><td class="cms">
 Plaats</td>
 <td colspan="2"><input type="text" name="plaats" size="60" maxlength="100" value="<?php echo $perrij['plaats']; ?>"></td></tr>
-	<tr><td class="cms">	
+	<tr><td class="cms">
 Telefoon</td>
-<td colspan="2"><input type="text" name="telefoon" size="60" maxlength="100" value="<?php echo $perrij['telefoon']; ?>"></td></tr>
-	<tr><td class="cms">	
+<td colspan="2"><input type="tel" name="telefoon" size="60" maxlength="100" value="<?php echo $perrij['telefoon']; ?>"></td></tr>
+	<tr><td class="cms">
 Contactpersoon</td>
 <td colspan="2"><input type="text" name="contactpersoon" size="60" maxlength="100" value="<?php echo $perrij['contactpersoon']; ?>"></td></tr>
-	<tr><td class="cms">	
+	<tr><td class="cms">
 Soort Optreden</td>
 <td colspan="2"><input type="text" name="soort_optreden" size="60" maxlength="100" value="<?php echo $perrij['soort_optreden']; ?>"></td></tr>
-	<tr><td class="cms">	
+	<tr><td class="cms">
 Geluid</td>
 <?php
 if($perrij['geluid'] == 'Nog niet bekend' || $perrij['geluid'] == '')
@@ -147,40 +147,40 @@ echo "<td colspan='2'><select name='geluid'>
     <option value='Joel, op lokatie aanwezig' selected>Joel, op lokatie aanwezig</option>
   </select></td>";}
   ?>
-      
+
 	</tr>
-	<tr><td class="cms">	
+	<tr><td class="cms">
 Boeking</td>
 <td colspan="2"><input type="text" name="boeking" size="60" maxlength="100" value="<?php echo $perrij['boeking']; ?>"></td></tr>
-	<tr><td class="cms">	
+	<tr><td class="cms">
 P.A. opbouw</td>
-<td colspan="2" class="overzicht"><input type="text" name="pa_opbouw" size="10" maxlength="100" value="<?php echo $perrij['pa_opbouw']; ?>">
+<td colspan="2" class="overzicht"><input type="time" name="pa_opbouw" value="<?php echo $perrij['pa_opbouw']; ?>">
 uur</td>
 	</tr>
-	<tr><td class="cms">	
+	<tr><td class="cms">
 Band opbouw</td>
-<td colspan="2" class="overzicht"><input type="text" name="band_opbouw" size="10" maxlength="100" value="<?php echo $perrij['band_opbouw']; ?>">
+<td colspan="2" class="overzicht"><input type="time" name="band_opbouw"value="<?php echo $perrij['band_opbouw']; ?>">
 uur</td>
 	</tr>
-	<tr><td class="cms">	
+	<tr><td class="cms">
 Soundcheck</td>
-<td colspan="2" class="overzicht"><input type="text" name="soundcheck" size="10" maxlength="100" value="<?php echo $perrij['soundcheck']; ?>">
+<td colspan="2" class="overzicht"><input type="time" name="soundcheck" value="<?php echo $perrij['soundcheck']; ?>">
 uur</td>
 	</tr>
-	<tr><td class="cms">	
+	<tr><td class="cms">
 Eettijden</td>
-<td colspan="2" class="overzicht"><input type="text" name="eettijden" size="10" maxlength="100" value="<?php echo $perrij['eettijden']; ?>">
+<td colspan="2" class="overzicht"><input type="time" name="eettijden" value="<?php echo $perrij['eettijden']; ?>">
 uur</td>
 	</tr>
-	<tr><td class="cms">	
-Spelen tussen</td>
-<td colspan="2" class="overzicht"><input type="text" name="spelen" size="20" maxlength="100" value="<?php echo $perrij['spelen']; ?>">
-uur</td>
+	<tr><td class="cms">
+Spelen om</td>
+<td colspan="2" class="overzicht"><input type="time" name="spelen" size="20" maxlength="100" value="<?php echo $perrij['spelen']; ?>">
+uur - <input type="time" name="eindtijd" size="20" maxlength="100" value="<?php echo $perrij['gage_tim']; ?>"> uur</td>
 	</tr>
 <tr><td class="cms">
 Sets</td>
 <td colspan="2"><input type="text" name="sets" size="10" maxlength="100" value="<?php echo $perrij['sets']; ?>"></td></tr>
-	<tr><td class="cms">	
+	<tr><td class="cms">
 Eten</td>
 <?php
 if($perrij['eten'] == 'ja')
@@ -194,27 +194,23 @@ echo "<td colspan='2'><select name='eten'>
 echo "<td colspan='2'><select name='eten'>
     <option value='ja'>ja</option>
     <option value='nee' selected>nee</option>
-    
+
   </select></td>";}
   ?>
-     
+
 	</tr>
-	<tr><td class="cms">	
+	<tr><td class="cms">
 Gage Band</td>
-<td colspan="2" class="overzicht"><input name="gage_band" type="text" size="10" maxlength="100" value="<?php echo $perrij['gage_band']; ?>">
+<td colspan="2" class="overzicht"><input name="gage_band" type="number" size="10" maxlength="100" value="<?php echo $perrij['gage_band']; ?>">
 Euro</td>
 	</tr>
-	<tr><td class="cms">	
-Gage Joël</td>
-<td colspan="2" class="overzicht"><input name="gage_joel" type="text" size="10" maxlength="100" value="<?php echo $perrij['gage_joel']; ?>">
+	<tr><td class="cms">
+Gage Joï¿½l</td>
+<td colspan="2" class="overzicht"><input name="gage_joel" type="number" size="10" maxlength="100" value="<?php echo $perrij['gage_joel']; ?>">
   Euro</td>
 	</tr>
-	<tr style="display:none"><td class="cms">	
-Gage Tim</td>
-<td colspan="2" class="overzicht"><input type="text" name="gage_tim" size="10" maxlength="100" value="<?php echo $perrij['gage_tim']; ?>">
-  Euro</td>
-	</tr>
-	<tr style="display:none"><td class="cms">	
+
+	<tr style="display:none"><td class="cms">
 Kees</td>
 <?php
 if($perrij['kees'] == 'ja')
@@ -228,11 +224,11 @@ echo "<td colspan='2'><select name='kees'>
 echo "<td colspan='2'><select name='kees'>
     <option value='ja'>ja</option>
     <option value='nee' selected>nee</option>
-    
+
   </select></td>";}
   ?>
 </tr>
-	<tr><td class="cms">	
+	<tr><td class="cms">
 Bijzonderheden</td>
 <td colspan="2"><textarea name="bijzonderheden" cols="60" rows="5"><?php echo $perrij['bijzonderheden']; ?></textarea></td></tr>
 <tr><td></td><td class="overzicht"><input type="checkbox" value="send" name="send_mail">Stuur wijzigingsmail</td></tr>

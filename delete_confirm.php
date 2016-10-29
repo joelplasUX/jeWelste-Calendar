@@ -22,12 +22,12 @@ body {
 include ('menu.php');
 include ('connect.php');
 $id=$_GET['id'];
-function displaynl($datum) 
-{ 
-$dag=substr($datum, 8, 2); 
-$maand=substr($datum, 5, 2); 
-$jaar=substr($datum, 0, 4); 
-echo $dag,"-",$maand,"-",$jaar; 
+function displaynl($datum)
+{
+$dag=substr($datum, 8, 2);
+$maand=substr($datum, 5, 2);
+$jaar=substr($datum, 0, 4);
+echo $dag,"-",$maand,"-",$jaar;
 }
 
 echo "<span class='cms'>Weet u zeker dat u onderstaand record wilt verwijderen?</span>";
@@ -40,7 +40,8 @@ echo "<table><tr><td></td><td></td></tr>";
 
 while ($perrij = mysql_fetch_array($result))
 {
-	echo "<tr><td class='cms'>Datum</td><td class='overzicht'>",displaynl($perrij["datum"]),"</td></tr>";
+	if($perrij["gage_tim"]=="50"){$perrij["gage_tim"]="";}
+	echo "<tr><td class='cms'>Datum</td><td class='overzicht'>",$perrij["datum"],"</td></tr>";
 	echo "<tr><td class='cms'>Status</td><td class='overzicht'>",$perrij["status"],"</td></tr>";
 if($perrij["lokatie"] != ""){
 	echo "<tr><td class='cms'>Lokatie</td><td class='overzicht'>",$perrij["lokatie"],"</td></tr>";
@@ -145,10 +146,10 @@ else{
 	echo "<tr><td class='cms'>Gage Band</td><td class='overzicht'>nog niet bekend</td></tr>";
 }
 if($perrij["gage_joel"] != ""){
-	echo "<tr><td class='cms'>Gage Joël</td><td class='overzicht'>",$perrij["gage_joel"]," euro</td></tr>";
+	echo "<tr><td class='cms'>Gage Joï¿½l</td><td class='overzicht'>",$perrij["gage_joel"]," euro</td></tr>";
 }
 else{
-	echo "<tr><td class='cms'>Gage Joël</td><td class='overzicht'>nog niet bekend</td></tr>";
+	echo "<tr><td class='cms'>Gage Joï¿½l</td><td class='overzicht'>nog niet bekend</td></tr>";
 }
 if($perrij["gage_tim"] != ""){
 	echo "<tr><td class='cms'>Gage Tim</td><td class='overzicht'>",$perrij["gage_tim"]," euro</td></tr>";

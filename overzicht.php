@@ -25,19 +25,19 @@ include ('menu.php');
 include ('connect.php');
 ?>
 
-<?php 
+<?php
 setlocale(LC_TIME, ' nl_NL.ISO8859-1');
 //@setlocale (LC_TIME, 'Dutch');
 //setlocale (LC_ALL, 'nl_NL');
 
-function displaynl($datum) 
-{ 
-$dag=substr($datum, 8, 2); 
-$maand=substr($datum, 5, 2); 
-$jaar=substr($datum, 0, 4); 
-echo $dag,"-",$maand,"-",$jaar; 
+function displaynl($datum)
+{
+$dag=substr($datum, 8, 2);
+$maand=substr($datum, 5, 2);
+$jaar=substr($datum, 0, 4);
+echo $dag,"-",$maand,"-",$jaar;
 
-} 
+}
 function displaynk($nieuwskop){$nk=substr($nieuwskop, 0 , 20); echo $nk;}
 function displayhead($headline){$head=substr($headline, 0 , 25);echo $head;}
 function displaydik($dikgedrukt){$dik=substr($dikgedrukt, 0 , 25);echo $dik;}
@@ -59,8 +59,9 @@ while ($perrij = mysql_fetch_array($result))
 	if($perrij['status']=="Gecancelled"){$rowclass="error";}
 	if($perrij['status']=="Definitief"){$rowclass="success";}
 	if($perrij["publish"]=="Ja"){$rowclass="info";}
+	if($perrij["gage_tim"]=="50"){$perrij["gage_tim"]="";}
 	echo "<tr class='",$rowclass,"'><td class='overzicht'>",$perrij["publish"],"</td><td class='overzicht'><a href='overzicht_item.php?id=",$perrij["id"],"' class='overzicht'>",substr(date("l", strtotime($perrij['datum'])), 0, 2),date("d m Y", strtotime($perrij['datum'])),"</a></td><td class='overzicht'><a href='overzicht_item.php?id=",$perrij["id"],"' class='overzicht'>",$perrij["status"],"</a></td><td class='overzicht'><a href='overzicht_item.php?id=",$perrij["id"],"' class='overzicht'>",$perrij["lokatie"]
-	,"</a></td><td class='overzicht'><a href='overzicht_item.php?id=",$perrij["id"],"' class='overzicht'>",$perrij["plaats"],"</a></td><td><div style='width: 80px;'><a href='http://maps.google.com/maps?saddr=Current%20Location&daddr=",$perrij["adres"]," ",$perrij["plaats"],"' target='_blank' class='btn btn-small'>Toon route</a></div></td><td class='overzicht'><a href='overzicht_item.php?id=",$perrij["id"],"' class='overzicht'>",$perrij["soort_optreden"],"</a></td><td class='overzicht'><a href='overzicht_item.php?id=",$perrij["id"],"' class='overzicht'>",$perrij["spelen"],"</a></td><td class='overzicht'><a href='overzicht_item.php?id=",$perrij["id"],"' class='overzicht'>",$perrij["geluid"],"</a></td><td><a href='wijzig_record.php?id=",$perrij["id"],"' class='cms'>wijzigen</a></td><td><a href='delete_confirm.php?id=",$perrij["id"],"' class='cms'>verwijder</a></td></tr>";
+	,"</a></td><td class='overzicht'><a href='overzicht_item.php?id=",$perrij["id"],"' class='overzicht'>",$perrij["plaats"],"</a></td><td><div style='width: 80px;'><a href='http://maps.google.com/maps?saddr=Current%20Location&daddr=",$perrij["adres"]," ",$perrij["plaats"],"' target='_blank' class='btn btn-small'>Toon route</a></div></td><td class='overzicht'><a href='overzicht_item.php?id=",$perrij["id"],"' class='overzicht'>",$perrij["soort_optreden"],"</a></td><td class='overzicht'><a href='overzicht_item.php?id=",$perrij["id"],"' class='overzicht'>",$perrij["spelen"]," - ",$perrij["gage_tim"],"</a></td><td class='overzicht'><a href='overzicht_item.php?id=",$perrij["id"],"' class='overzicht'>",$perrij["geluid"],"</a></td><td><a href='wijzig_record.php?id=",$perrij["id"],"' class='cms'>wijzigen</a></td><td><a href='delete_confirm.php?id=",$perrij["id"],"' class='cms'>verwijder</a></td></tr>";
 	$rowclass="nope";
 
 

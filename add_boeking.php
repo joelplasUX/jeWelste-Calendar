@@ -30,32 +30,38 @@ $sets=$_POST['sets'];
 $eten=$_POST['eten'];
 $gage_band=$_POST['gage_band'];
 $gage_joel=$_POST['gage_joel'];
-$gage_tim=$_POST['gage_tim'];
+$eindtijd=$_POST['eindtijd'];
 $bijzonderheden=mysql_escape_string($_POST['bijzonderheden']);
 $kees=$_POST['kees'];
 
-$dg = substr($datum, 0, 2);
-$md = substr($datum, 3, 2);
-$jr = substr($datum, 6, 4);
+$dg = substr($datum, 8, 2);
+$md = substr($datum, 5, 2);
+$jr = substr($datum, 0, 4);
 
-$datum_mysql = $jr."-".$md."-".$dg;
+$datum_nl = $dg."-".$md."-".$jr;
 
-$nieuws_query="insert into jewelste_agenda values ('','$publish','$datum_mysql','$status','$lokatie','$adres','$postcode','$plaats','$telefoon','$contactpersoon','$soort_optreden','$geluid','$boeking','$pa_opbouw','$band_opbouw','$soundcheck','$eettijden','$spelen','$sets','$eten','$gage_band','$gage_joel','$gage_tim','$bijzonderheden','$kees','','')";
+$nieuws_query="insert into jewelste_agenda values ('','$publish','$datum','$status','$lokatie','$adres','$postcode','$plaats','$telefoon','$contactpersoon','$soort_optreden','$geluid','$boeking','$pa_opbouw','$band_opbouw','$soundcheck','$eettijden','$spelen','$sets','$eten','$gage_band','$gage_joel','$eindtijd','$bijzonderheden','$kees','','')";
 
 $resultaat=mysql_query($nieuws_query);
 
 
 echo "<span class='cms'><i>De boeking".mysql_insert_id()." is toegevoegd aan de database.<br><br></i></span>";
+
 $agendaid = mysql_insert_id();
 
 $from_name = "jeWelste Agenda";
 $from_address = "agenda2@jewelste.nl";
 $to_name = "jeWelste";
 $to_address = "agenda2@jewelste.nl";
+if($band_opbouw==""){
+$startTime = $datum." 18:00:00";
+}else {
 $startTime = $datum." ".$band_opbouw.":00";
+}
 $endTime = $datum."23:59:00";
 $subject = "[".$status."] Optreden jeWelste > ".$lokatie;
-$description .= "<h1>Optreden jeWelste > ".$lokatie."</h1>";
+$description .= "<h1>[".$status."]Optreden jeWelste > ".$lokatie."</h1>";
+$description .= "Datum: ".$datum_nl."<br/>";
 $description .= $plaats."<br/>";
 $description .= "Status: ".$status."<br/>";
 $description .= "Soort optreden: ".$soort_optreden."<br/>";
@@ -63,10 +69,9 @@ $description .= "Openbaar: ".$publish."<br/>";
 $description .= "Gage: ".$gage_band."<br/>";
 $description .= "Opmerkingen: ".$bijzonderheden."<br/>";
 $description .= "http://jewelste.nl/agenda/overzicht_item.php?id=".$agendaid;
+$description .= "<br/><br/><br/><br/><br/><br/><br/>";
 $location = $plaats;
 sendIcalEvent($from_name, $from_address, $to_name, $to_address, $startTime, $endTime, $subject, $description, $location, $agendaid);
-
-
 
 
 

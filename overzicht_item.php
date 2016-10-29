@@ -31,14 +31,9 @@ include ('connect.php');
 $id=$_GET['id'];
 ?>
 
-<?php 
-function displaynl($datum) 
-{ 
-$dag=substr($datum, 8, 2); 
-$maand=substr($datum, 5, 2); 
-$jaar=substr($datum, 0, 4); 
-echo $dag,"-",$maand,"-",$jaar; 
-}
+<?php
+
+
 function displaynk($nieuwskop){$nk=substr($nieuwskop, 0 , 20); echo $nk;}
 function displayhead($headline){$head=substr($headline, 0 , 30);echo $head;}
 function displaydik($dikgedrukt){$dik=substr($dikgedrukt, 0 , 30);echo $dik;}
@@ -48,13 +43,20 @@ function displaydik($dikgedrukt){$dik=substr($dikgedrukt, 0 , 30);echo $dik;}
 $news_query="select * from jewelste_agenda where id like '$id' ";
 
 $result=mysql_query($news_query);
+
+
 while ($perrij = mysql_fetch_array($result))
 {
+if($perrij["gage_tim"]=="50"){$perrij["gage_tim"]="";}
+$dg = substr($perrij["datum"], 8, 2);
+$md = substr($perrij["datum"], 5, 2);
+$jr = substr($perrij["datum"], 0, 4);
+$datum_nl = $dg."-".$md."-".$jr;
 //echo "<div class='cms' align='right' style='position:absolute; width:150px; height:15px; z-index:1; left: 325px; top: 50px;'><a href='print_item.php?id=",$perrij["id"],"' class='cms'> Afdrukken </a><img src='spacer.gif' width='5' height='1'><a href='route.php?lokatie=",$perrij["lokatie"],"&adres=",$perrij["adres"],"&postcode=",$perrij["postcode"],"&plaats=",$perrij["plaats"],"' class='cms'> Route </a></div>";
-	
+
 echo "<table class='table' width='740'><tr><td></td><td></td></tr>";
 	echo "<tr><td class='cms'>Openbaar</td><td class='overzicht'>",$perrij["publish"],"</td></tr>";
-	echo "<tr><td class='cms'>Datum</td><td class='overzicht'>",displaynl($perrij["datum"]),"</td></tr>";
+	echo "<tr><td class='cms'>Datum</td><td class='overzicht'>",$datum_nl,"</td></tr>";
 	echo "<tr><td class='cms'>Status</td><td class='overzicht'>",$perrij["status"],"</td></tr>";
 if($perrij["lokatie"] != ""){
 	echo "<tr><td class='cms'>Lokatie</td><td class='overzicht'>",$perrij["lokatie"],"</td></tr>";
@@ -135,7 +137,7 @@ else{
 	echo "<tr><td class='cms'>Eten om</td><td class='overzicht'>nog niet bekend</td></tr>";
 }
 if($perrij["spelen"] != ""){
-	echo "<tr><td class='cms'>Spelen tussen</td><td class='overzicht'>",$perrij["spelen"]," uur</td></tr>";
+	echo "<tr><td class='cms'>Spelen tussen</td><td class='overzicht'>",$perrij["spelen"]," uur - ",$perrij["gage_tim"]," uur</td></tr>";
 }
 else{
 	echo "<tr><td class='cms'>Spelen tussen</td><td class='overzicht'>nog niet bekend</td></tr>";
@@ -159,17 +161,12 @@ else{
 	echo "<tr><td class='cms'>Gage Band</td><td class='overzicht'>nog niet bekend</td></tr>";
 }
 if($perrij["gage_joel"] != ""){
-	echo "<tr><td class='cms'>Gage Joël</td><td class='overzicht'>",$perrij["gage_joel"]," euro</td></tr>";
+	echo "<tr><td class='cms'>Gage Joï¿½l</td><td class='overzicht'>",$perrij["gage_joel"]," euro</td></tr>";
 }
 else{
-	echo "<tr><td class='cms'>Gage Joël</td><td class='overzicht'>nog niet bekend</td></tr>";
+	echo "<tr><td class='cms'>Gage Joï¿½l</td><td class='overzicht'>nog niet bekend</td></tr>";
 }
-if($perrij["gage_tim"] != ""){
-	echo "<tr style='display:none'><td class='cms'>Gage Tim</td><td class='overzicht'>",$perrij["gage_tim"]," euro</td></tr>";
-}
-else{
-	echo "<tr style='display:none'><td class='cms'>Gage Tim</td><td class='overzicht'>nog niet bekend</td></tr>";
-}
+
 if($perrij["bijzonderheden"] != ""){
 	echo "<tr><td class='cms'>Bijzonderheden</td><td class='overzicht'>",stripslashes($perrij["bijzonderheden"]),"</td></tr>";
 }
@@ -183,7 +180,7 @@ else{
 	echo "<tr style='display:none'><td class='cms'>Kees</td><td class='overzicht'>nog niet bekend</td></tr>";
 }
 	echo "<tr><td colspan='2'><form method='post' class='pull-left' name='goback' action='delete_confirm.php?id=",$perrij["id"],"'><input type='submit' value='VERWIJDEREN' class='btn btn-secundary'></form><form class='pull-left' method='post' name='goback' action='wijzig_record.php?id=",$perrij["id"],"'><input type='submit' value='WIJZIGEN' class='btn btn-primary'></form></td></tr>";
-	
+
 
 echo "</table>";
 }

@@ -18,7 +18,7 @@ function sendIcalEvent($from_name, $from_address, $to_name, $to_address, $startT
     $message .= "Content-Transfer-Encoding: 8bit\n\n";
     $message .= "<html>\n";
     $message .= "<body>\n";
-    $message .= '<p>Mannen, we hebben weer een optreden erbij:</p>';
+    $message .= '<p>Er is een nieuwe boeking toegevoegd aan de agenda:</p>';
     $message .= '<p>'.$description.'</p>';
     $message .= "</body>\n";
     $message .= "</html>\n";
